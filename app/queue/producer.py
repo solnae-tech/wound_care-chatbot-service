@@ -1,23 +1,36 @@
 import json
-import uuid
+import pika
 from app.queue.config import get_connection
+
+
+CHAT_QUEUE = "chat_queue"
+CHAT_DLQ = "chat_queue_dlq"
 
 def send_task(payload):
 
     connection = get_connection()
-    channel = connection.channel()
+    try:
+        channel = connection.channel()
+        channel.confirm_delivery()
 
-    channel.queue_declare(queue='chat_queue')
+        channel.queue_declare(queue=CHAT_DLQ, durable=True)
+        channel.queue_declare(queue=CHAT_QUEUE)
 
-    task_id = str(uuid.uuid4())
-    payload["task_id"] = task_id
+        job_id = payload.get("job_id")
+        if not job_id:
+            raise ValueError("job_id is required in payload")
 
-    channel.basic_publish(
-        exchange='',
-        routing_key='chat_queue',
-        body=json.dumps(payload)
-    )
+        channel.basic_publish(
+            exchange="",
+            routing_key=CHAT_QUEUE,
+            body=json.dumps(payload),
+            properties=pika.BasicProperties(
+                delivery_mode=2,
+                content_type="application/json",
+            ),
+            mandatory=True,
+        )
 
-    connection.close()
-
-    return task_id
+        return job_id
+    finally:
+        connection.close()

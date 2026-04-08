@@ -1,41 +1,38 @@
-from fastapi import APIRouter, HTTPException
+from fastapi import APIRouter
 from pydantic import BaseModel, Field, field_validator
-from typing import Optional
 from app.queue.producer import send_task
 
 router = APIRouter()
 
 
-class DLOutput(BaseModel):
-    infection_detected: bool = False
-
-
 class ChatRequest(BaseModel):
-    message: str = Field(..., min_length=1, max_length=1000, description="User message")
+    user_id: str = Field(..., min_length=1, max_length=100, description="Unique user identifier")
+    job_id: str = Field(..., min_length=1, max_length=100, description="Unique job identifier")
+    wound_description: str = Field(..., min_length=1, max_length=500, description="Wound classifier output")
     pain_level: int = Field(..., ge=0, le=10, description="Pain level (0-10)")
-    discomfort_level: int = Field(..., ge=0, le=10, description="Discomfort level (0-10)")
-    dl_output: Optional[DLOutput] = Field(default_factory=lambda: DLOutput())
+    description: str = Field(..., min_length=1, max_length=1000, description="Patient symptom description")
     
-    @field_validator('message')
+    @field_validator('user_id', 'job_id', 'wound_description', 'description')
     @classmethod
-    def validate_message(cls, v):
+    def validate_non_empty(cls, v):
         if not v or not v.strip():
-            raise ValueError('Message cannot be empty or whitespace only')
+            raise ValueError('Field cannot be empty or whitespace only')
         return v.strip()
 
 
 @router.post("/chat")
 def chat(request: ChatRequest):
-    # Convert to dict for processing
+    # Keep queue payload lean and aligned with async worker contract.
     payload = {
-        "message": request.message,
+        "user_id": request.user_id,
+        "job_id": request.job_id,
+        "wound_description": request.wound_description,
         "pain_level": request.pain_level,
-        "discomfort_level": request.discomfort_level,
-        "dl_output": request.dl_output.model_dump()
+        "description": request.description,
     }
     
-    task_id = send_task(payload)
+    job_id = send_task(payload)
     return {
-        "task_id": task_id,
+        "job_id": job_id,
         "status": "processing"
     }
