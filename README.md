@@ -41,7 +41,7 @@ Final JSON Response
 ---
 
 ## Project Structure
-'''
+```
 medical_chatbot_mvp/
 │
 ├── app/
@@ -65,7 +65,7 @@ medical_chatbot_mvp/
 ├── requirements.txt
 ├── .env
 └── README.md
-'''
+```
 
 ---
 
