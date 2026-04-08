@@ -12,7 +12,7 @@ def callback(ch, method, properties, body):
 
     save_result(task_id, result)
     print("Saving result:", task_id, result)
-    print(f"✅ Processed task {task_id}")
+    print(f"Processed task {task_id}")
 
 def start_worker():
 
@@ -27,7 +27,7 @@ def start_worker():
         auto_ack=True
     )
 
-    print("🚀 Worker started...")
+    print("Worker started...")
     channel.start_consuming()
 
 

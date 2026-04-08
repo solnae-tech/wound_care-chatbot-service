@@ -16,7 +16,7 @@ def build_db():
         store.add(text, emb)
 
     store.save()
-    print("✅ Vector DB created")
+    print("Vector DB created")
 
 if __name__ == "__main__":
     build_db()

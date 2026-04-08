@@ -1,21 +1,21 @@
-# 🩺 Medical AI Chatbot (MVP)
+# Medical AI Chatbot (MVP)
 
 An intelligent medical assistant chatbot that combines **Deep Learning (DL)**, **LLM reasoning (Groq)**, and **RAG (Retrieval-Augmented Generation)** to provide safe and context-aware guidance for wound-related conditions.
 
 ---
 
-## 🚀 Features
+## Features
 
-- 🤖 **LLM-based reasoning** using Groq API  
-- 🧠 **DL model integration** (infection detection input)  
-- 🔍 **Vector database (FAISS)** for medical knowledge retrieval  
-- ⚠️ **Severity classification (low / medium / high)**  
-- 🛡️ **Rule-based safety overrides**  
-- 💬 Structured JSON responses  
+- **LLM-based reasoning** using Groq API  
+- **DL model integration** (infection detection input)  
+- **Vector database (FAISS)** for medical knowledge retrieval  
+- **Severity classification (low / medium / high)**  
+- **Rule-based safety overrides**  
+- Structured JSON responses
 
 ---
 
-## 🧠 System Architecture
+## System Architecture
 User Input + DL Output
 ↓
 Chatbot Engine
@@ -30,7 +30,7 @@ Final JSON Response
 
 ---
 
-## 📦 Tech Stack
+## Tech Stack
 
 - **Backend:** FastAPI  
 - **LLM:** Groq 
@@ -40,7 +40,7 @@ Final JSON Response
 
 ---
 
-## 📁 Project Structure
+## Project Structure
 medical_chatbot_mvp/
 │
 ├── app/
@@ -68,7 +68,7 @@ medical_chatbot_mvp/
 
 ---
 
-## ⚙️ Setup Instructions
+## Setup Instructions
 
 ### 1. Clone the repository
 
@@ -90,7 +90,7 @@ GROQ_API_KEY=your_api_key_here
 python app/db/ingest.py
 6. Run the server
 uvicorn app.main:app --reload
-🧪 API Usage
+## API Usage
 Endpoint:
 POST /chat
 Sample Request:
@@ -108,7 +108,7 @@ Sample Response:
   "medical_attention_needed": "no",
   "severity": "medium"
 }
-🧠 Decision Logic
+## Decision Logic
 
 The system combines:
 
@@ -121,17 +121,19 @@ Pain ≥ 8 → High severity
 Infection + pain ≥ 6 → High severity
 Moderate symptoms → Medium
 Low symptoms → Low
-⚠️ Safety Design
-🚫 No medical diagnosis
-⚠️ High-risk cases → always escalated
-🧠 Symptoms can override model predictions
-🔍 RAG used only for safe cases
-🎯 Demo Highlights
-Shows intelligent decision-making
-Combines multiple AI techniques
-Handles edge cases (e.g., high pain without infection)
-Provides safe and explainable outputs
-🔮 Future Improvements
+## Safety Design
+- No medical diagnosis
+- High-risk cases are always escalated
+- Symptoms can override model predictions
+- RAG used only for safe cases
+
+## Demo Highlights
+- Shows intelligent decision-making
+- Combines multiple AI techniques
+- Handles edge cases (e.g., high pain without infection)
+- Provides safe and explainable outputs
+
+## Future Improvements
 Add duration & symptom tracking
 Improve medical dataset (RAG)
 Frontend chat interface

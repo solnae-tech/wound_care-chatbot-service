@@ -16,29 +16,29 @@ def parse_json(response):
 
 def apply_rules(result, infection, pain, discomfort):
 
-    # 🔴 Rule 1: Severe pain → HIGH
+    # Rule 1: Severe pain → HIGH
     if pain >= 8:
         return {
-            "answer": "⚠️ Severe pain detected. Please consult a doctor immediately.",
+            "answer": "Severe pain detected. Please consult a doctor immediately.",
             "medical_attention_needed": "yes",
             "severity": "high"
         }
 
-    # 🔴 Rule 2: Infection + moderate pain → HIGH
+    # Rule 2: Infection + moderate pain → HIGH
     if infection and pain >= 6:
         return {
-            "answer": "⚠️ Possible infection with significant pain. Consult a doctor.",
+            "answer": "Possible infection with significant pain. Consult a doctor.",
             "medical_attention_needed": "yes",
             "severity": "high"
         }
 
-    # 🟡 Rule 3: Medium case (FORCE it)
+    # Rule 3: Medium case (FORCE it)
     if pain >= 4 or discomfort >= 5:
         result["severity"] = "medium"
         result["medical_attention_needed"] = "no"
         return result
 
-    # 🟢 Rule 4: Low case
+    # Rule 4: Low case
     result["severity"] = "low"
     result["medical_attention_needed"] = "no"
 
@@ -47,7 +47,7 @@ def apply_rules(result, infection, pain, discomfort):
 
 def chatbot(payload):
 
-    # 🔹 Input extraction
+    # Input extraction
     user_input = payload.get("message", "")
     dl_output = payload.get("dl_output", {})
 
@@ -55,7 +55,7 @@ def chatbot(payload):
     pain = payload.get("pain_level", 0)
     discomfort = payload.get("discomfort_level", 0)
 
-    # 🔹 Step 1: LLM Decision
+    # Step 1: LLM Decision
     prompt = f"""
 You are a medical assistant.
 
@@ -83,19 +83,19 @@ Rules:
 
     raw = groq_call(prompt)
 
-    # 🔹 Step 2: Parse safely
+    # Step 2: Parse safely
     result = parse_json(raw)
 
-    # 🔹 Step 3: Apply rule overrides (VERY IMPORTANT)
+    # Step 3: Apply rule overrides (VERY IMPORTANT)
     result = apply_rules(result, infection, pain, discomfort)
 
-    # 🔹 Step 4: RAG only for safe cases
+    # Step 4: RAG only for safe cases
     if result.get("severity") in ["low", "medium"]:
         query = f"{user_input} pain level {pain}"
         care = retrieve(query)
         result["answer"] += f"\n\nRecommended Care:\n{care}"
 
     else:
-        result["answer"] = "⚠️ This seems serious. Please consult a doctor immediately."
+        result["answer"] = "This seems serious. Please consult a doctor immediately."
 
     return result
