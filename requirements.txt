@@ -1,0 +1,12 @@
+fastapi
+uvicorn
+faiss-cpu
+sentence-transformers
+groq
+python-dotenv
+numpy
+pydantic
+pika
+pytest
+pytest-asyncio
+httpx
