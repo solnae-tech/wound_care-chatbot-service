@@ -1,1 +1,22 @@
-{"19ca36ce-8f34-4ae6-b604-3cb1ccb56395": {"answer": "It sounds like your wound is causing moderate pain. Keep the area clean, change dressings as directed, and avoid activities that stress the wound. If the pain worsens, you notice increased redness, swelling, drainage, or any signs of infection, seek medical care promptly.\n\nRecommended Care:\nMinor cuts: Clean with water, apply antiseptic, cover with bandage. Use paracetamol for pain.\nSmall wounds: Keep clean and dry. Apply antibiotic ointment if needed.", "medical_attention_needed": "no", "severity": "medium"}, "b9df0998-f7fe-43d1-8e8b-0cdea9a0f1e1": {"answer": "I understand that your wound is causing some discomfort. With a pain level of 5 and a discomfort level of 4, this is considered moderate. Keep the wound clean, protect it, and watch for any changes such as increased pain, swelling, redness, or any signs of infection. If any of those occur, or if the pain gets worse, consider seeing a healthcare professional.\n\nRecommended Care:\nMinor cuts: Clean with water, apply antiseptic, cover with bandage. Use paracetamol for pain.\nSmall wounds: Keep clean and dry. Apply antibiotic ointment if needed.", "medical_attention_needed": "no", "severity": "medium"}}
+{
+  "19ca36ce-8f34-4ae6-b604-3cb1ccb56395": {
+    "answer": "It sounds like your wound is causing moderate pain. Keep the area clean, change dressings as directed, and avoid activities that stress the wound. If the pain worsens, you notice increased redness, swelling, drainage, or any signs of infection, seek medical care promptly.\n\nRecommended Care:\nMinor cuts: Clean with water, apply antiseptic, cover with bandage. Use paracetamol for pain.\nSmall wounds: Keep clean and dry. Apply antibiotic ointment if needed.",
+    "medical_attention_needed": "no",
+    "severity": "medium"
+  },
+  "b9df0998-f7fe-43d1-8e8b-0cdea9a0f1e1": {
+    "answer": "I understand that your wound is causing some discomfort. With a pain level of 5 and a discomfort level of 4, this is considered moderate. Keep the wound clean, protect it, and watch for any changes such as increased pain, swelling, redness, or any signs of infection. If any of those occur, or if the pain gets worse, consider seeing a healthcare professional.\n\nRecommended Care:\nMinor cuts: Clean with water, apply antiseptic, cover with bandage. Use paracetamol for pain.\nSmall wounds: Keep clean and dry. Apply antibiotic ointment if needed.",
+    "medical_attention_needed": "no",
+    "severity": "medium"
+  },
+  "aab000c1-9796-426c-92e7-1c159491d3cd": {
+    "answer": "Error processing response\n\nRecommended Care:\nGeneral wound care: Keep clean, apply antiseptic, and monitor for signs of infection.",
+    "medical_attention_needed": "no",
+    "severity": "medium"
+  },
+  "d1d61392-4fd7-4c19-b2d6-9ed72150e1fb": {
+    "answer": "Error processing response\n\nRecommended Care:\nGeneral wound care: Keep clean, apply antiseptic, and monitor for signs of infection.",
+    "medical_attention_needed": "no",
+    "severity": "medium"
+  }
+}
